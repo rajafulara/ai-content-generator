@@ -44,10 +44,10 @@ const IsUserSubscribe=async()=>{
     // @ts-ignore
     const result= await db.select().from(UserSubscription).where(eq(UserSubscription.email,user?.primaryEmailAddress?.emailAddress));
 
-    // if(result){
-    //     setUserSubscription(true);
-    //     setMaxWords(100000)
-    // }
+    if(result.length > 0){
+        setUserSubscription(true);
+        setMaxWords(1000000)
+    }
 }
 
 const GetTotalUsage=(result:HISTORY[])=>{
