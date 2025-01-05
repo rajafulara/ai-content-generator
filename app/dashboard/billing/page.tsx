@@ -5,12 +5,15 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { db } from '@/utils/db';
 import { UserSubscription } from '@/utils/schema';
 import moment from 'moment';
+import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
 import { useRouter } from 'next/navigation';
 
 
 function billing() {
 
   const {user}=useUser();
+
+  const {userSubscription,setUserSubscription}=useContext(UserSubscriptionContext)
 
   const router=useRouter();
 
@@ -185,6 +188,7 @@ function billing() {
       <div className='mt-5'>
             <PayPalButtons style={{ layout: "horizontal" }}
             // @ts-ignore
+            disabled={userSubscription}
             onApprove={()=>OnPaymentSuccess()} 
             createOrder={(data,action)=>{
               // @ts-ignore
